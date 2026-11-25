@@ -19,7 +19,7 @@ function validarReserva(datos, reservas = []) {
   if (!RECURSOS.includes(datos.recurso)) return 'Elegí uno de los espacios disponibles.';
   if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(datos.inicio) || !/^([01]\d|2[0-3]):[0-5]\d$/.test(datos.fin)) return 'Revisá el horario ingresado.';
   if (datos.fin <= datos.inicio) return 'La hora de fin debe ser posterior al inicio.';
-  if (hayCruce(datos, reservas)) return 'Ese espacio ya tiene una ronda en ese horario.';
+  if (hayCruce(datos, reservas)) return 'Esa atención ya tiene un turno en ese horario.';
   return '';
 }
 
@@ -62,7 +62,7 @@ function guardarReservas(almacenamiento, reservas) {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { validarReserva, hayCruce, ordenarReservas, leerReservas, guardarReservas, fechaValida, CLAVE_RESERVAS };
+  module.exports = { validarReserva, hayCruce, ordenarReservas, leerReservas, guardarReservas, fechaValida, CLAVE_RESERVAS, nombreRecurso: (valor) => ({ mesa: 'Atención 1', taller: 'Atención 2' })[valor] || valor };
 }
 
 if (typeof document !== 'undefined') {
@@ -80,7 +80,7 @@ if (typeof document !== 'undefined') {
   }
 
   function nombreRecurso(valor) {
-    return valor === 'mesa' ? 'Mesa de lectura' : 'Taller de ejercicios';
+    return ({ mesa: 'Atención 1', taller: 'Atención 2' })[valor] || valor;
   }
 
   function fechaLegible(valor) {
@@ -94,7 +94,7 @@ if (typeof document !== 'undefined') {
     if (!lista.length) {
       const vacio = document.createElement('p');
       vacio.className = 'agenda-vacia';
-      vacio.textContent = 'Todavía no hay rondas. La primera puede ser la tuya.';
+      vacio.textContent = 'Todavía no hay turnos reservados.';
       agenda.append(vacio);
       return;
     }
@@ -106,14 +106,14 @@ if (typeof document !== 'undefined') {
       const fecha = document.createElement('p');
       fecha.textContent = fechaLegible(item.fecha);
       const participante = document.createElement('p');
-      participante.textContent = `Ronda de ${item.nombre}`;
+      participante.textContent = `Turno de ${item.nombre}`;
       const tema = document.createElement('p');
       tema.textContent = item.motivo;
       const cancelar = document.createElement('button');
       cancelar.type = 'button';
       cancelar.className = 'boton-secundario';
-      cancelar.textContent = 'Cancelar ronda';
-      cancelar.setAttribute('aria-label', `Cancelar la ronda de ${item.nombre}, ${fechaLegible(item.fecha)} a las ${item.inicio}`);
+      cancelar.textContent = 'Cancelar turno';
+      cancelar.setAttribute('aria-label', `Cancelar turno de ${item.nombre}, ${fechaLegible(item.fecha)} a las ${item.inicio}`);
       cancelar.addEventListener('click', () => cancelarReserva(item.id));
       tarjeta.append(titulo, fecha, participante, tema, cancelar);
       agenda.append(tarjeta);
@@ -124,8 +124,8 @@ if (typeof document !== 'undefined') {
     const contenedor = comprobante.querySelector('.detalles-comprobante');
     contenedor.replaceChildren();
     const detalles = [
-      ['Participante', item.nombre], ['Día', fechaLegible(item.fecha)],
-      ['Horario', `${item.inicio} a ${item.fin}`], ['Espacio', nombreRecurso(item.recurso)], ['Tema', item.motivo],
+      ['Nombre', item.nombre], ['Fecha', fechaLegible(item.fecha)],
+      ['Horario', `${item.inicio} a ${item.fin}`], ['Atención', nombreRecurso(item.recurso)], ['Motivo', item.motivo],
     ];
     for (const [etiqueta, valor] of detalles) {
       const linea = document.createElement('p');
@@ -165,7 +165,7 @@ if (typeof document !== 'undefined') {
       comprobante.querySelector('.detalles-comprobante').replaceChildren();
     }
     actualizarAgenda();
-    anunciar('La ronda se canceló.', 'exito');
+    anunciar('El turno se canceló.', 'exito');
   }
 
   try {
@@ -194,14 +194,14 @@ if (typeof document !== 'undefined') {
     const nueva = { ...datos, id: `ronda-${Date.now()}-${Math.random().toString(36).slice(2, 8)}` };
     const siguientes = [...reservas, nueva];
     if (!guardarReservas(almacenamiento, siguientes)) {
-      anunciar('No se pudo guardar la ronda. Revisá el almacenamiento del navegador e intentá de nuevo.', 'error');
+      anunciar('No se pudo guardar el turno. Revisá el almacenamiento del navegador e intentá de nuevo.', 'error');
       return;
     }
     reservas = siguientes;
     reservaVigente = nueva;
     actualizarAgenda();
     mostrarComprobante(nueva);
-    anunciar('Tu ronda quedó guardada. Acá tenés el comprobante.', 'exito');
+    anunciar('Tu turno quedó guardado. Acá tenés el comprobante.', 'exito');
     formulario.reset();
     document.getElementById('nombre').focus();
   });
