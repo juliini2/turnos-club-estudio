@@ -1,0 +1,90 @@
+:root {
+  color-scheme: light;
+  --ciruela: #783957;
+  --rosa: #f4e1e9;
+  --fondo: #fff9fc;
+  --tinta: #382631;
+  --suave: #765e6b;
+  --borde: #e4d2db;
+  --blanco: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--tinta);
+  background: var(--fondo);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: var(--fondo); }
+.encabezado {
+  min-height: 148px; padding: 26px max(28px, calc((100vw - 1200px) / 2));
+  display: grid; grid-template-columns: 1fr 2fr 1fr; align-items: center; gap: 24px;
+  border-bottom: 1px solid var(--borde); background: var(--blanco);
+}
+.marca { color: var(--ciruela); text-decoration: none; font: 27px Georgia, serif; letter-spacing: -1.2px; }
+.marca span { display: block; margin-top: 5px; color: var(--suave); font: 10px Arial, sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+.sobretitulo, .numero-seccion { margin: 0 0 9px; color: var(--ciruela); font-size: 10px; font-weight: 700; letter-spacing: 1.7px; }
+h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+h1 { margin: 0; font-size: clamp(28px, 4vw, 43px); letter-spacing: -1.4px; }
+.encabezado-nota { justify-self: end; max-width: 170px; color: var(--suave); font: italic 15px Georgia, serif; line-height: 1.5; }
+.maqueta { width: min(1200px, calc(100% - 56px)); margin: 34px auto 54px; display: grid; grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.55fr); gap: 28px; align-items: start; }
+.panel { border: 1px solid var(--borde); background: var(--blanco); }
+.formulario-panel { padding: 28px 26px; background: var(--rosa); }
+.panel h2 { margin: 0; color: var(--tinta); font-size: 27px; line-height: 1.2; }
+.intro-formulario { margin: 12px 0 23px; color: var(--suave); font-size: 14px; line-height: 1.55; }
+form { display: grid; gap: 8px; }
+label { margin-top: 7px; font-size: 12px; font-weight: 700; }
+input, select, textarea { width: 100%; min-height: 43px; padding: 10px 11px; border: 1px solid #cdb4c0; border-radius: 0; background: var(--fondo); color: var(--tinta); font: 14px Arial, sans-serif; }
+textarea { min-height: 78px; resize: vertical; }
+input[type="time"] { min-width: 100px; }
+input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid #a8587a; outline-offset: 3px; }
+.horarios { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.horarios > div { display: grid; gap: 8px; }
+.boton-principal, .boton-secundario { min-height: 43px; border: 1px solid var(--ciruela); padding: 10px 14px; cursor: pointer; font: 700 13px Arial, sans-serif; }
+.boton-principal { margin-top: 9px; display: flex; align-items: center; justify-content: space-between; background: var(--ciruela); color: var(--blanco); }
+.boton-principal:hover { background: #612b45; }
+.boton-secundario { background: transparent; color: var(--ciruela); }
+.boton-secundario:hover { background: var(--rosa); }
+.aviso { min-height: 20px; margin: 5px 0 0; font-size: 13px; line-height: 1.45; }
+.aviso.error { color: #8b2337; }
+.aviso.exito { color: #285e45; }
+.nota-pasado { margin: 14px 0 0; padding-top: 13px; border-top: 1px solid #d9c1cc; color: var(--suave); font-size: 11px; line-height: 1.5; }
+.columna-agenda { display: grid; gap: 24px; }
+.agenda-panel { padding: 27px 29px; }
+.cabecera-seccion, .comprobante-cabecera { display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+.sello { display: grid; width: 54px; height: 54px; place-content: center; border: 1px solid var(--borde); border-radius: 50%; color: var(--ciruela); text-align: center; font-size: 8px; line-height: 1.35; letter-spacing: 1px; }
+.agenda { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 23px; }
+.agenda-vacia { grid-column: 1 / -1; margin: 0; padding: 24px 18px; border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); color: var(--suave); font: italic 16px Georgia, serif; }
+.turno { min-width: 0; padding: 16px; border: 1px solid var(--borde); border-left: 3px solid var(--ciruela); background: #fffdfd; }
+.turno h3 { margin: 0 0 10px; color: var(--ciruela); font-size: 17px; line-height: 1.3; }
+.turno p { overflow-wrap: anywhere; margin: 5px 0; color: var(--suave); font-size: 12px; line-height: 1.45; }
+.turno .boton-secundario { min-height: 36px; margin-top: 9px; padding: 7px 9px; font-size: 11px; }
+.comprobante-panel { padding: 24px 29px; background: var(--rosa); }
+.comprobante-panel[hidden] { display: none; }
+.marca-check { display: grid; width: 34px; height: 34px; place-content: center; border-radius: 50%; background: var(--ciruela); color: var(--blanco); font-size: 17px; }
+.detalles-comprobante { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 22px; margin: 18px 0; }
+.detalles-comprobante p { margin: 0; padding: 9px 0; border-top: 1px solid #d9c1cc; overflow-wrap: anywhere; font-size: 13px; line-height: 1.45; }
+footer { display: flex; justify-content: space-between; gap: 18px; padding: 20px max(28px, calc((100vw - 1200px) / 2)); border-top: 1px solid var(--borde); color: var(--suave); font-size: 10px; letter-spacing: .8px; }
+@media (max-width: 760px) {
+  .encabezado { grid-template-columns: 1fr auto; min-height: 128px; padding: 22px 24px; gap: 14px; }
+  .titulo-pagina { grid-column: 1 / -1; grid-row: 2; }
+  .encabezado-nota { grid-column: 2; grid-row: 1; max-width: 135px; margin: 0; font-size: 13px; }
+  .maqueta { width: min(620px, calc(100% - 32px)); margin: 20px auto 38px; grid-template-columns: 1fr; gap: 18px; }
+  .formulario-panel, .agenda-panel, .comprobante-panel { padding: 22px 20px; }
+  .columna-agenda { gap: 18px; }
+  footer { padding: 18px 20px; font-size: 9px; }
+}
+@media (max-width: 420px) {
+  .marca { font-size: 23px; }
+  .encabezado { padding-inline: 18px; }
+  .encabezado-nota { max-width: 108px; font-size: 12px; }
+  .maqueta { width: calc(100% - 24px); }
+  .agenda { grid-template-columns: 1fr; }
+  .detalles-comprobante { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 7px; }
+}
+@media print {
+  body.imprimiendo-comprobante * { visibility: hidden; }
+  body.imprimiendo-comprobante #comprobante,
+  body.imprimiendo-comprobante #comprobante * { visibility: visible; }
+  body.imprimiendo-comprobante #comprobante { position: absolute; inset: 0 auto auto 0; width: 100%; border: 0; background: white; }
+  body.imprimiendo-comprobante #comprobante .no-print { display: none; }
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff9fc">
+  <title>Ronda de encuentros · Entre Líneas</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="encabezado">
+    <a class="marca" href="#portada" aria-label="Entre Líneas, inicio">entre líneas<span>club de estudio</span></a>
+    <div class="titulo-pagina" id="portada">
+      <p class="sobretitulo">COMPARTIR EL ESTUDIO</p>
+      <h1>Ronda de encuentros</h1>
+    </div>
+    <p class="encabezado-nota">Un espacio para pensar en compañía.</p>
+  </header>
+
+  <main class="maqueta">
+    <section class="panel formulario-panel" aria-labelledby="titulo-formulario">
+      <p class="numero-seccion">01 / RESERVA</p>
+      <h2 id="titulo-formulario">Armá tu ronda</h2>
+      <p class="intro-formulario">Elegí un espacio y contanos qué tema querés compartir.</p>
+      <form id="formulario-reserva" novalidate>
+        <label for="nombre">Tu nombre</label>
+        <input id="nombre" name="nombre" type="text" autocomplete="name" maxlength="70" required>
+
+        <label for="fecha">Día del encuentro</label>
+        <input id="fecha" name="fecha" type="date" required>
+
+        <label for="recurso">Espacio</label>
+        <select id="recurso" name="recurso" required>
+          <option value="">Elegí un espacio</option>
+          <option value="mesa">Mesa de lectura</option>
+          <option value="taller">Taller de ejercicios</option>
+        </select>
+
+        <div class="horarios">
+          <div>
+            <label for="inicio">Desde</label>
+            <input id="inicio" name="inicio" type="time" required>
+          </div>
+          <div>
+            <label for="fin">Hasta</label>
+            <input id="fin" name="fin" type="time" required>
+          </div>
+        </div>
+
+        <label for="motivo">Tema para compartir</label>
+        <textarea id="motivo" name="motivo" rows="3" maxlength="180" required></textarea>
+        <button class="boton-principal" type="submit">Reservar una ronda <span aria-hidden="true">↗</span></button>
+        <p id="aviso" class="aviso" role="status" aria-live="polite"></p>
+      </form>
+      <p class="nota-pasado">¿Estás practicando? También podés elegir una fecha pasada.</p>
+    </section>
+
+    <div class="columna-agenda">
+      <section class="panel agenda-panel" aria-labelledby="titulo-agenda">
+        <div class="cabecera-seccion">
+          <div><p class="numero-seccion">02 / ENCUENTROS</p><h2 id="titulo-agenda">Rondas en agenda</h2></div>
+          <span class="sello" aria-hidden="true">ENTRE<br>LÍNEAS</span>
+        </div>
+        <div id="agenda" class="agenda" aria-live="polite"></div>
+      </section>
+
+      <section id="comprobante" class="panel comprobante-panel" aria-labelledby="titulo-comprobante" hidden>
+        <div class="comprobante-cabecera">
+          <div><p class="numero-seccion">03 / CONFIRMACIÓN</p><h2 id="titulo-comprobante">Tu comprobante</h2></div>
+          <span class="marca-check" aria-hidden="true">✓</span>
+        </div>
+        <div class="detalles-comprobante"></div>
+        <button id="imprimir-comprobante" class="boton-secundario no-print" type="button">Imprimir comprobante</button>
+      </section>
+    </div>
+  </main>
+  <footer><span>ENTRE LÍNEAS · CLUB DE ESTUDIO</span><span>Aprender también es encontrarse.</span></footer>
+</body>
+</html>
